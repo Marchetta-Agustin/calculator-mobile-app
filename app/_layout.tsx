@@ -1,24 +1,35 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import * as NavigationBar from 'expo-navigation-bar';
+import { globalStyles } from "@/styles/global-styles";
+import { useFonts } from "expo-font";
+import { Slot } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { Platform, View } from "react-native";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+const isAndroid = Platform.OS === "android";
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+if (isAndroid) {
+  NavigationBar.setStyle("dark");
+  //NavigationBar.setBackgroundColorAsync("black");
+}
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+const RootLayout = () => {
+
+  const [loaded] = useFonts({
+    SpaceMono: require("../assets/fonts/Space_Mono/SpaceMono-Regular.ttf"),
+  })
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    <View style={ globalStyles.background }>
+
+      <Slot />
+
+      <StatusBar style="light" />
+    </View>
+  )
 }
+
+export default RootLayout;
