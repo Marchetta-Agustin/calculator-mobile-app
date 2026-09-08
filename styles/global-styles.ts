@@ -8,10 +8,22 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: Colors.background,
     },
 
+    tabBar: {
+        backgroundColor: Colors.background,
+        marginBottom: 15,
+    },
+
+    iconText: {
+        color: Colors.lightGray,
+        fontSize: 14,
+        textAlign: "auto",
+        fontFamily: "SpaceMono"
+    },
+
     calculatorContainer: {
         flex:1,
         justifyContent: "flex-end",
-        paddingBottom: 45,
+        paddingBottom: 15,
     },
 
     mainResult: {
@@ -51,5 +63,116 @@ export const globalStyles = StyleSheet.create({
         color: Colors.textPrimary,
         fontWeight: 300,
         fontFamily: "SpaceMono",
+    },
+
+    screen: {
+        flex: 1,
+        justifyContent: "flex-start", 
+        padding: 16,
+    },
+
+    containerButtonOptions: {
+        flexDirection: 'row',
+        backgroundColor: Colors.darkGray,
+        borderRadius: 8,
+        padding: 4,
+    },
+    
+    buttonOptions: {
+        flex: 1,
+        paddingVertical: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+    },
+
+    buttonOptionsSelected: {
+        backgroundColor: Colors.orange,
+        // Sombras básicas para iOS y Android
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+    },
+
+    containerDataField: {
+        flexDirection: "row",
+        gap: 10,
+        alignItems: "center",
+        backgroundColor: Colors.darkGray,
+        borderRadius: 8,
+        padding: 15,
+        marginBlock: 50,
+    },
+
+    containerNameCountry: {
+        height: 55,
+        padding: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+        backgroundColor: Colors.background,
+    },
+
+    containerValueMoney: {
+        flex: 1,
+        height: 55, 
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        alignItems: "flex-start",
+        justifyContent: 'center',
+        borderRadius: 6,
+        backgroundColor: Colors.background,
+    },
+
+    containerError: {
+        flexDirection: 'row',
+        backgroundColor: Colors.darkGray,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderRadius: 8,
+        borderColor: Colors.orange,
+        padding: 30,
+    },
+
+    text: {
+        fontSize: 14,
+        color: Colors.textPrimary,
+        fontWeight: '500',
+    },
+    
+    textSelected: {
+        color: "#000000",
+        fontWeight: 'bold',
+    },
+
+    textCountry: {
+        fontSize: 24,
+        color: Colors.textSecondary,
+        fontWeight: '500',
+        textAlign: "center",
+    },
+
+    textInput: {
+        fontSize: 20,
+        color: Colors.textPrimary,
+        fontWeight: '500',
+        textAlign: "left",
+    },
+
+    textLoading: {
+        fontSize: 20,
+        color: Colors.orange,
+        fontWeight: '500',
+        textAlign: "center",
+    },
+
+    textError: {
+        fontSize: 20,
+        color: Colors.textPrimary,
+        fontWeight: '500',
+        textAlign: "center",
     }
 })

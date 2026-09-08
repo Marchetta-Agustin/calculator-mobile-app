@@ -8,4 +8,7 @@ export const Colors = {
     textPrimary: "white",
     textSecondary: "#666666",
     background: "#000000",
+
+    icon: "#666666",
+    iconSelected: "#FF9427",
 } as const;

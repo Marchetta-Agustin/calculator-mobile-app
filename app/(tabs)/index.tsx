@@ -1,4 +1,5 @@
 import CalculatorButton from "@/components/CalculatorButton";
+import ScreenContainer from "@/components/ScreenContainer";
 import ThemeText from "@/components/ThemeText";
 import { Colors } from "@/constants/Colors";
 import { useCaculator } from "@/hooks/useCalculator";
@@ -23,7 +24,7 @@ const CalculatorApp = () => {
     } = useCaculator();
 
   return (
-    <View style={ globalStyles.calculatorContainer}>
+    <ScreenContainer style={ [globalStyles.background, globalStyles.calculatorContainer] }>
 
         {/* Resultados */}
         <View
@@ -179,7 +180,7 @@ const CalculatorApp = () => {
 
         </View>
 
-    </View>
+    </ScreenContainer>
   )
 }
 
