@@ -6,7 +6,10 @@ import { useDolarApi } from "@/hooks/useDolarApi";
 import { SelectOptionsButton } from '@/components/SelectOptionsButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/Colors';
-import DataField from '@/components/dataField';
+import AmountInput from '@/components/AmountInput';
+import AmountResult from '@/components/AmountResult';
+import calcularConversion from '@/utils/calcularConversion';
+
 
 // Definimos las opciones con 'as const' para que TS extraiga los valores exactos
 const opcionesFiltroMoneda = [
@@ -15,11 +18,14 @@ const opcionesFiltroMoneda = [
 ] as const;
 
 const opcionesFiltroModo = [
-    { label: 'Venta', value: 'venta' },
+    { label: 'Venta', value: 'venta'},
     { label: 'Compra', value: 'compra' },
 ] as const;
 
+const opcionesCodigoMoneda: 'ARG$' | 'USD$' = 'ARG$';
 const DolarNacionalScreen = () => {
+
+    const [valueInput, setValueInput] = useState("0");
 
     // Tipamos el estado inicialmente con uno de los valores del array
     const [filtroMoneda, setFiltroMoneda] = useState<typeof opcionesFiltroMoneda[number]['value']>('oficial');
@@ -67,14 +73,20 @@ const DolarNacionalScreen = () => {
                 <SelectOptionsButton
                     options={opcionesFiltroMoneda}
                     selected={filtroMoneda}
-                    onSelect={(nuevoValor) => setFiltroMoneda(nuevoValor)}
+                    onSelect={(nuevoValor) => setFiltroMoneda(nuevoValor) }
                 />
 
-                //TODO componente propio q sea el input
-                <DataField 
-                    value='ARG$'
-                    input='1230000000000'
-                />
+                {/* // Input que permite ingresar el numero a conversionar */}
+                <View style={ globalStyles.containerComponentInput }>
+                    <Text style={ globalStyles.textInput }>
+                        Ingrese el valor a convertir:
+                    </Text>
+                    <AmountInput 
+                    label={filtroModo === 'venta' ? "ARG$" : "USD$"}
+                    value={valueInput}
+                    onChangeText={(input) => setValueInput(input)}
+                    />
+                </View>
 
                 {/* Selector de Modo (Venta/Compra) */}
                 <SelectOptionsButton
@@ -83,13 +95,27 @@ const DolarNacionalScreen = () => {
                     onSelect={(nuevoValor) => setFiltroModo(nuevoValor)}
                 />
 
-                //TODO componente propio q sea el output
-                <DataField 
-                    value='USD$'
-                    input='123'
-                />
+                {/* // Output que muestra la conversion calculada */}
+                <View style={ globalStyles.containerComponentInput }>
+                    <Text style={ globalStyles.textInput }>
+                        Valor de conversión:
+                    </Text>
+                    <AmountResult 
+                    label={filtroModo === 'venta' ? "USD$" : "ARG$"}
+                    value={calcularConversion(valueInput, filtroMoneda, filtroModo, oficialData, blueData)}
+                    />
+                </View>
 
-                //TODO text q muestra el precio de compra y venta del dolar
+                {/* // Text que muestra los valores de cada dolar en su compra y venta */}
+                <View style={ globalStyles.containerDataDolar }>
+                    <Text style={ globalStyles.textInput }>
+                        Compra: $ { filtroMoneda === "oficial" ? oficialData?.compra : blueData?.compra }
+                    </Text>
+                    <Text> </Text>
+                    <Text style={ globalStyles.textInput }>
+                        Venta: $ { filtroMoneda === "oficial" ? oficialData?.venta : blueData?.venta }
+                    </Text>
+                </View>
 
             </SafeAreaView>
         </ScreenContainer>

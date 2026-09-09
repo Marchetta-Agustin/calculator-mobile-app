@@ -90,20 +90,24 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: Colors.orange,
         // Sombras básicas para iOS y Android
         elevation: 2,
-        shadowColor: '#000',
+        shadowColor: '#1a1a1a',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
+    },
+
+    containerComponentInput: {
+        backgroundColor: Colors.darkGray,
+        borderRadius: 8,
+        padding: 10,
+        marginBlock: 40,
+        gap: 10,
     },
 
     containerDataField: {
         flexDirection: "row",
         gap: 10,
         alignItems: "center",
-        backgroundColor: Colors.darkGray,
-        borderRadius: 8,
-        padding: 15,
-        marginBlock: 50,
     },
 
     containerNameCountry: {
@@ -118,12 +122,19 @@ export const globalStyles = StyleSheet.create({
     containerValueMoney: {
         flex: 1,
         height: 55, 
-        paddingVertical: 8,
+        paddingVertical: 5,
         paddingHorizontal: 10,
-        alignItems: "flex-start",
         justifyContent: 'center',
         borderRadius: 6,
         backgroundColor: Colors.background,
+    },
+
+    containerDataDolar: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+        padding: 20
     },
 
     containerError: {
@@ -138,9 +149,9 @@ export const globalStyles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 14,
+        fontSize: 15,
         color: Colors.textPrimary,
-        fontWeight: '500',
+        fontWeight: '600',
     },
     
     textSelected: {
@@ -156,9 +167,9 @@ export const globalStyles = StyleSheet.create({
     },
 
     textInput: {
-        fontSize: 20,
+        fontSize: 19,
         color: Colors.textPrimary,
-        fontWeight: '500',
+        fontWeight: '600',
         textAlign: "left",
     },
 
