@@ -22,7 +22,7 @@ export const useDolarApi = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState< string | null >(null);
 
-    // Creamos la función que pausa la ejecución
+    // Función que pausa la ejecución
     const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export const useDolarApi = () => {
             console.log("Mostrando pantalla de carga...");
 
             // PAUSA ARTIFICIAL: Congela el código por 5 segundos (5000 ms)
-            //await delay(5000); 
+            await delay(5000); 
             
             const [oficial, blue] = await Promise.all([
     

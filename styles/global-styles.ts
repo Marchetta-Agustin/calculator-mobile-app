@@ -67,7 +67,7 @@ export const globalStyles = StyleSheet.create({
 
     screen: {
         flex: 1,
-        justifyContent: "flex-start", 
+        justifyContent: "center", 
         padding: 16,
     },
 

@@ -9,6 +9,8 @@ import { Colors } from '@/constants/Colors';
 import AmountInput from '@/components/AmountInput';
 import AmountResult from '@/components/AmountResult';
 import calcularConversion from '@/utils/calcularConversion';
+import Loading from '@/components/Loading';
+import ErrorScreen from '@/components/ErrorScreen';
 
 
 // Definimos las opciones con 'as const' para que TS extraiga los valores exactos
@@ -22,10 +24,9 @@ const opcionesFiltroModo = [
     { label: 'Compra', value: 'compra' },
 ] as const;
 
-const opcionesCodigoMoneda: 'ARG$' | 'USD$' = 'ARG$';
 const DolarNacionalScreen = () => {
 
-    const [valueInput, setValueInput] = useState("0");
+    const [valueInput, setValueInput] = useState("");
 
     // Tipamos el estado inicialmente con uno de los valores del array
     const [filtroMoneda, setFiltroMoneda] = useState<typeof opcionesFiltroMoneda[number]['value']>('oficial');
@@ -38,26 +39,15 @@ const DolarNacionalScreen = () => {
         blueData,
     } = useDolarApi();
 
-    // 2. Renderizado condicional según el estado
+    // Renderizado condicional según el estado
     if (loading) return (
-        <ScreenContainer style={globalStyles.screen}>
-            <ActivityIndicator size="large" color={Colors.orange} />
-
-            <Text
-                style={globalStyles.textLoading}
-                >Cargando información ...{error}</Text>
+        <ScreenContainer>
+            <Loading />
         </ScreenContainer>
     );
 
     if (error) return(
-
-        <ScreenContainer style={globalStyles.screen}>
-            <View style={globalStyles.containerError}>
-                <Text
-                    style={globalStyles.textError}
-                >Hubo un problema: {error}</Text>
-            </View>
-        </ScreenContainer>
+        <ErrorScreen message={error}/>
     );
 
     console.log("----- INFORMACIÓN OFICIAL -----");

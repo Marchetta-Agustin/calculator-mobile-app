@@ -6,8 +6,8 @@ export default function calcularConversion(valueInput:string, filtroMoneda:strin
         .replaceAll(".","")
         .replaceAll(",","."));
 
-    if(filtroMoneda.valueOf() === 'oficial') {
-        if(filtroModo.valueOf() === 'compra'){
+    if(filtroMoneda === 'oficial') {
+        if(filtroModo === 'compra'){
 
             result = cant * oficialData.compra; 
         } else {
@@ -16,7 +16,7 @@ export default function calcularConversion(valueInput:string, filtroMoneda:strin
         }
 
     } else {
-        if(filtroModo.valueOf() === 'compra'){
+        if(filtroModo === 'compra'){
 
             result = cant * blueData.compra; 
         } else {
@@ -24,5 +24,6 @@ export default function calcularConversion(valueInput:string, filtroMoneda:strin
             result = cant / blueData.venta;
         }
     }
+    result.toFixed(2);
     return String(result);
 }
