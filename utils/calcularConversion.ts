@@ -1,5 +1,6 @@
+import { DolarInfo } from "@/hooks/useDolarApi";
 
-export default function calcularConversion(valueInput:string, filtroMoneda:string, filtroModo:string, oficialData:any, blueData:any){
+export default function calcularConversion(valueInput:string, filtroMoneda:string, filtroModo:string, oficialData:DolarInfo, blueData:DolarInfo){
 
     let result = 0;
     let cant = Number(valueInput
@@ -24,6 +25,5 @@ export default function calcularConversion(valueInput:string, filtroMoneda:strin
             result = cant / blueData.venta;
         }
     }
-    result.toFixed(2);
-    return String(result);
-}
+    return String(result.toFixed(2));
+}   

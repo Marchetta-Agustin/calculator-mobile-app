@@ -67,8 +67,8 @@ export const globalStyles = StyleSheet.create({
 
     screen: {
         flex: 1,
-        justifyContent: "center", 
-        padding: 16,
+        justifyContent: "center",
+        paddingHorizontal: 16,
     },
 
     containerButtonOptions: {
@@ -129,12 +129,47 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: Colors.background,
     },
 
-    containerDataDolar: {
+    containerData: {
         flex: 1,
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: "space-between",
         padding: 20
+    },
+
+    modalOverlay: {
+        //backgroundColor: Colors.darkGray
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        backgroundColor: Colors.background,
+        marginBottom: 20
+    },
+
+    modalContent: {
+        marginBottom: 16
+    },
+
+    buttonModal: {
+        padding: 10,
+        borderRadius: 8,
+        alignItems: "center",
+        backgroundColor: Colors.orange,
+    },
+
+    currencyRow: {
+        flex: 1,
+        flexDirection: "row",
+        borderRadius: 8,
+        padding: 20,
+        alignContent: "center",
+        justifyContent: "space-between",
+        marginBottom: 16,
+        //backgroundColor: Colors.background,
+        backgroundColor: Colors.darkGray,
+    },
+
+    flatListData: {
+        marginBottom: 0,
     },
 
     containerError: {
@@ -169,6 +204,27 @@ export const globalStyles = StyleSheet.create({
     textInput: {
         fontSize: 19,
         color: Colors.textPrimary,
+        fontWeight: '600',
+        textAlign: "left",
+    },
+
+    modalTitle: {
+        fontSize: 25,
+        color: Colors.textPrimary,
+        fontWeight: '600',
+        textAlign: "left",
+    },
+
+    currencyRowText: {
+        fontSize: 18,
+        fontWeight: '600',
+        textAlign: "left",
+        color: Colors.textPrimary
+    },
+
+    textInformation: {
+        fontSize: 19,
+        color: Colors.textInformation,
         fontWeight: '600',
         textAlign: "left",
     },

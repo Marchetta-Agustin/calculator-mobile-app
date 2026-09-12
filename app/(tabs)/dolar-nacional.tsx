@@ -92,18 +92,25 @@ const DolarNacionalScreen = () => {
                     </Text>
                     <AmountResult 
                     label={filtroModo === 'venta' ? "USD$" : "ARG$"}
-                    value={calcularConversion(valueInput, filtroMoneda, filtroModo, oficialData, blueData)}
+                    value={oficialData !== undefined && blueData !== undefined ? calcularConversion(valueInput, filtroMoneda, filtroModo, oficialData, blueData) : "Error"}
                     />
                 </View>
 
                 {/* // Text que muestra los valores de cada dolar en su compra y venta */}
-                <View style={ globalStyles.containerDataDolar }>
+                <View style={ globalStyles.containerData }>
                     <Text style={ globalStyles.textInput }>
                         Compra: $ { filtroMoneda === "oficial" ? oficialData?.compra : blueData?.compra }
                     </Text>
                     <Text> </Text>
                     <Text style={ globalStyles.textInput }>
                         Venta: $ { filtroMoneda === "oficial" ? oficialData?.venta : blueData?.venta }
+                    </Text>
+                </View>
+
+                {/* // Text que muestra la ultima actualizacion de la moneda */}
+                <View style={ globalStyles.containerData }>
+                    <Text style={globalStyles.textInformation}>
+                        Cotización del { filtroMoneda === "oficial" ? oficialData?.fechaActualizacion : blueData?.fechaActualizacion}
                     </Text>
                 </View>
 

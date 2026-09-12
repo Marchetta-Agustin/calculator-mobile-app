@@ -55,5 +55,5 @@ export const ListCountries = [
     { code: "EGP", name: "Libra Egipcia", countryCode: "eg" },
     { code: "NGN", name: "Naira Nigeriana", countryCode: "ng" },
     { code: "KES", name: "Chelín Keniano", countryCode: "ke" },
-    { code: "MAD", name: "Dírham Marroquí", countryCode: "ma" }
+    { code: "MAD", name: "Dírham Marroquí", countryCode: "ma" },
 ] as const;

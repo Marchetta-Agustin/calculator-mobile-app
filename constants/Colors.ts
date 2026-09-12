@@ -7,6 +7,7 @@ export const Colors = {
 
     textPrimary: "white",
     textSecondary: "#666666",
+    textInformation: "#3d3c3c",
     background: "#000000",
 
     icon: "#666666",

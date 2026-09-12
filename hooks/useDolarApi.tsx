@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-interface DolarInfo {
+export interface DolarInfo {
   casa: string;
   compra: number;
   venta: number;
-  fechaActualizacion: string; // viene como ISO string, no como Date
+  fechaActualizacion: string | null; // viene como ISO string, no como Date
   moneda: string;
   nombre: string;
 }
@@ -18,7 +18,7 @@ const messageError = 'Error al traer los datos del dolar.\n \n😓 Lo sentimos, 
 
 export const useDolarApi = () => {
 
-    const [data, setData] = useState< Dolars | undefined >();
+    const [data, setData] = useState<Dolars | undefined>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState< string | null >(null);
 
@@ -38,7 +38,7 @@ export const useDolarApi = () => {
             console.log("Mostrando pantalla de carga...");
 
             // PAUSA ARTIFICIAL: Congela el código por 5 segundos (5000 ms)
-            await delay(5000); 
+            //await delay(5000); 
             
             const [oficial, blue] = await Promise.all([
     
@@ -61,9 +61,15 @@ export const useDolarApi = () => {
                 oficial: oficial,
                 blue: blue,
             }
+
+            const fechaCortaOficial = oficial.fechaActualizacion ? oficial.fechaActualizacion.split('T')[0] : null;
+            const fechaCortaBlue = blue.fechaActualizacion ? blue.fechaActualizacion.split('T')[0] : null;
+
+            oficial.fechaActualizacion = fechaCortaOficial;
+            blue.fechaActualizacion = fechaCortaBlue;
     
             setData(dolars);          // Guardar datos exitosos
-            console.log(dolars);
+            //console.log(dolars);
             setLoading(false);        // Apagar estado de carga
             
         } catch (error) {

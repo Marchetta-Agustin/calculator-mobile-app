@@ -1,11 +1,11 @@
 import { ListCountries } from "@/data/currencies";
 import { useEffect, useState } from "react";
 
-interface DataApi {
+export interface DataApi {
     fechaActualizacion: string;
     monedaOrigen: string;
     monedaDestino: string;
-    cotizacion: string;
+    cotizacion: number;
 }
 
 type MonedaCodigo = typeof ListCountries[number]['code'];
@@ -24,12 +24,13 @@ export const useGlobalApi = (monedaOrigen: MonedaCodigo, monedaDestino: MonedaCo
     useEffect(() => {
 
         let urlApi = `https://api.frankfurter.dev/v2/rate/${monedaOrigen}/${monedaDestino}`;
-
+        
         fecthApiGlobal(urlApi);
     }, [monedaOrigen, monedaDestino]);
 
     async function fecthApiGlobal(urlApi:string) {
-        
+        setLoading(true);
+        setError(null);
         try {
 
             console.log("Mostrando pantalla de carga...");
