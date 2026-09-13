@@ -1,6 +1,6 @@
 import ScreenContainer from "@/components/ScreenContainer";
 import { useState } from "react";
-import { ListCountries } from "@/data/currencies";
+import { ListCountries, Moneda } from "@/data/currencies";
 import { useGlobalApi } from "@/hooks/useGlobalApi";
 import Loading from "@/components/Loading";
 import ErrorScreen from "@/components/ErrorScreen";
@@ -12,7 +12,6 @@ import CurrencyPickerModal from "@/components/CurrencyPickerModal";
 import calcularConversionGlobal from "@/utils/calcularConversionGlobal";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export type MonedaCodigo = typeof ListCountries[number];
 type CampoActivo = "origen" | "destino" | null;
 
 const GlobalScreen = () => {
@@ -21,8 +20,8 @@ const GlobalScreen = () => {
     const objetoInicialARS = ListCountries.find(m => m.code === 'ARS')!;
 
     const [valueInput, setValueInput] = useState("");
-    const [monedaOrigen, setMonedaOrigen] = useState<MonedaCodigo>(objetoInicialARS);
-    const [monedaDestino, setMonedaDestino] = useState<MonedaCodigo>(objetoInicialUSD);
+    const [monedaOrigen, setMonedaOrigen] = useState<Moneda>(objetoInicialARS);
+    const [monedaDestino, setMonedaDestino] = useState<Moneda>(objetoInicialUSD);
     const [modalVisible, setModalVisible] = useState(false);
     const [campoActivo, setCampoActivo] = useState<CampoActivo>(null);
 
@@ -96,7 +95,7 @@ const GlobalScreen = () => {
                         setModalVisible(false);
                         setCampoActivo(null);
                     }}
-                    onSelect={(moneda:MonedaCodigo) => {
+                    onSelect={(moneda:Moneda) => {
                         setModalVisible(false);
 
                         if(campoActivo === "origen"){

@@ -57,3 +57,5 @@ export const ListCountries = [
     { code: "KES", name: "Chelín Keniano", countryCode: "ke" },
     { code: "MAD", name: "Dírham Marroquí", countryCode: "ma" },
 ] as const;
+
+export type Moneda = typeof ListCountries[number];

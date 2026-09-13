@@ -49,7 +49,7 @@ export const globalStyles = StyleSheet.create({
 
     button: {
         height: 70,
-        width: 70,
+        //width: 70,
         backgroundColor: Colors.darkGray,
         borderRadius: 100,
         justifyContent: "center",
@@ -138,6 +138,7 @@ export const globalStyles = StyleSheet.create({
     },
 
     modalOverlay: {
+        flex:1,
         //backgroundColor: Colors.darkGray
         paddingHorizontal: 10,
         paddingVertical: 10,
