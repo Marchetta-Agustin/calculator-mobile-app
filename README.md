@@ -1,47 +1,84 @@
-# Welcome to your Expo app 👋
+# 🧮 Calculadora + Conversor de Moneda (React Native / Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Proyecto personal de aprendizaje: una app móvil que arrancó como una calculadora simple (de un tutorial) y se fue ampliando, de a poco y por proyecto, incorporando funcionalidades reales de una app profesional: consumo de APIs externas, manejo de estado, componentes reutilizables, diseño responsive y despliegue a un dispositivo físico.
 
-## Get started
+## 📱 Pantallas
 
-1. Install dependencies
+| Pantalla | Descripción |
+|---|---|
+| **Calculadora** | Calculadora funcional básica (operaciones aritméticas simples), con límite de 15 dígitos. |
+| **Dólar Nacional** | Conversor peso argentino ⇄ dólar, con cotización **oficial** y **blue** en tiempo real ([dolarapi.com](https://dolarapi.com)). Alterna entre modo compra/venta. |
+| **Global** | Conversor entre ~40 monedas de todo el mundo, con datos en vivo de la API de [Frankfurter](https://frankfurter.dev). Selector de moneda con bandera, buscador y botón para invertir la conversión. |
 
-   ```bash
-   npm install
-   ```
+## 🛠️ Stack técnico
 
-2. Start the app
+- **[Expo](https://expo.dev)** (SDK 54) + **React Native**
+- **TypeScript**
+- **Expo Router** — navegación basada en archivos, con tabs inferiores
+- **expo-image**, **expo-haptics**, **expo-navigation-bar**
+- APIs externas: [dolarapi.com](https://dolarapi.com) (cotización ARS) y [Frankfurter](https://frankfurter.dev) (cotizaciones globales)
+- **EAS Build** para compilar e instalar en dispositivos físicos
 
-   ```bash
-   npx expo start
-   ```
+## 🏗️ Arquitectura
 
-In the output, you'll find options to open the app in a
+```
+app/
+  (tabs)/           → pantallas con barra de tabs (Expo Router route group)
+    _layout.tsx     → configuración de las 3 tabs
+    index.tsx       → Calculadora
+    dolar-nacional.tsx
+    global.tsx
+  _layout.tsx       → layout raíz (fuente, tema, barra de navegación)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+components/         → componentes reutilizables (controlados, sin estado propio):
+  ScreenContainer, SelectOptionsButton (genérico <T>), AmountInput,
+  AmountResult, CurrencyPickerModal, Loading, ErrorScreen
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+hooks/              → lógica de datos, separada de la UI:
+  useCalculator, useDolarApi, useGlobalApi
 
-## Get a fresh project
+utils/              → funciones puras de cálculo (sin estado ni hooks):
+  calcularConversion, calcularConversionGlobal
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+data/               → datos estáticos (lista curada de monedas + banderas)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**Principios aplicados a lo largo del proyecto:**
+- Separación entre lógica de datos (hooks) y presentación (componentes).
+- Componentes controlados: reciben su valor y avisan cambios por props, sin estado propio duplicado.
+- Tipado con TypeScript, incluyendo *union types* de literales (`"oficial" | "blue"`) en vez de `string` genérico.
+- Diseño responsive real: sin anchos/altos fijos en píxeles — se usa `flex`, `%` relativos al contenedor, `SafeAreaView` (con `edges` explícitos) y `ScrollView` como red de seguridad, para que las pantallas se vean bien en cualquier tamaño de celular.
 
-## Learn more
+## 🚀 Correr el proyecto localmente
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm install
+npx expo start
+```
+Escaneá el QR con la app **Expo Go** en tu celular.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📦 Compilar un instalable (Android)
 
+El proyecto usa **EAS Build** para generar un APK instalable sin pasar por Google Play:
+
+```bash
+npm install -g eas-cli
+eas login
+eas build --platform android --profile preview
+```
+
+Al terminar, se genera un link/QR para descargar el `.apk` directo en el celular (hay que habilitar "instalar apps de origen desconocido" la primera vez).
+
+## 📚 Documentación de aprendizaje
+
+El detalle de cada fase (decisiones tomadas, bugs encontrados y cómo se resolvieron) está documentado en Word, fuera del repo:
+- Fase 1 — Conversor de Dólar Nacional
+- Fase 2 — Conversor Global, diseño responsive y despliegue
+
+## 🔮 Próximos pasos
+
+- Conversor de unidades (km, metros, segundos, horas, minutos)
+- Pulido de tipado (sacar los `any` restantes) y redondeo de decimales consistente
 ## Join the community
 
 Join our community of developers creating universal apps.
