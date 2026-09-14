@@ -1,5 +1,9 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const { width } = Dimensions.get('window');
+
+const isTablet = width < 384;
 
 export const globalStyles = StyleSheet.create({
 
@@ -51,7 +55,7 @@ export const globalStyles = StyleSheet.create({
     },
 
     button: {
-        height: 70,
+        height: "70%",
         //width: 70,
         backgroundColor: Colors.darkGray,
         borderRadius: 100,
@@ -62,7 +66,7 @@ export const globalStyles = StyleSheet.create({
     buttonText: {
         textAlign: "center",
         padding: 10,
-        fontSize: 25,
+        fontSize: isTablet ? 13 : 25,
         color: Colors.textPrimary,
         fontWeight: 300,
         fontFamily: "SpaceMono",

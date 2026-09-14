@@ -12,7 +12,6 @@ enum Operator {
 export const useCaculator = () => {
 
     const [formula, setFormula] = useState("0");
-
     const [number, setNumber] = useState("0");
     const [prevNumber, setPrevNumber] = useState("0");
 
@@ -148,6 +147,8 @@ export const useCaculator = () => {
     }
 
     const buildNumber = ( numberString: string ) => {
+
+        if (number.length > 15) return true;
         
         // Verificamos si ya existe el punto decimal
         if (number.includes(".") && numberString === "-") return;
