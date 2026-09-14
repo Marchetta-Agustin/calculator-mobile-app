@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Text, ActivityIndicator, View, } from 'react-native';
+import { Text, View, ScrollView, } from 'react-native';
 import { globalStyles } from '@/styles/global-styles';
 import ScreenContainer from "@/components/ScreenContainer";
 import { useDolarApi } from "@/hooks/useDolarApi";
 import { SelectOptionsButton } from '@/components/SelectOptionsButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/Colors';
 import AmountInput from '@/components/AmountInput';
 import AmountResult from '@/components/AmountResult';
 import calcularConversion from '@/utils/calcularConversion';
@@ -57,63 +56,64 @@ const DolarNacionalScreen = () => {
     console.log(blueData);
     return (
         <ScreenContainer>
-
             <SafeAreaView  style={globalStyles.screen} >
-                {/* Selector de Moneda */}
-                <SelectOptionsButton
-                    options={opcionesFiltroMoneda}
-                    selected={filtroMoneda}
-                    onSelect={(nuevoValor) => setFiltroMoneda(nuevoValor) }
-                />
+                <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
 
-                {/* // Input que permite ingresar el numero a conversionar */}
-                <View style={ globalStyles.containerComponentInput }>
-                    <Text style={ globalStyles.textInput }>
-                        Ingrese el valor a convertir:
-                    </Text>
-                    <AmountInput 
-                    label={filtroModo === 'venta' ? "ARG$" : "USD$"}
-                    value={valueInput}
-                    onChangeText={(input) => setValueInput(input)}
+                    {/* Selector de Moneda */}
+                    <SelectOptionsButton
+                        options={opcionesFiltroMoneda}
+                        selected={filtroMoneda}
+                        onSelect={(nuevoValor) => setFiltroMoneda(nuevoValor) }
                     />
-                </View>
 
-                {/* Selector de Modo (Venta/Compra) */}
-                <SelectOptionsButton
-                    options={opcionesFiltroModo}
-                    selected={filtroModo}
-                    onSelect={(nuevoValor) => setFiltroModo(nuevoValor)}
-                />
+                    {/* // Input que permite ingresar el numero a conversionar */}
+                    <View style={ globalStyles.containerComponentInput }>
+                        <Text style={ globalStyles.textInput }>
+                            Ingrese el valor a convertir:
+                        </Text>
+                        <AmountInput 
+                        label={filtroModo === 'venta' ? "ARG$" : "USD$"}
+                        value={valueInput}
+                        onChangeText={(input) => setValueInput(input)}
+                        />
+                    </View>
 
-                {/* // Output que muestra la conversion calculada */}
-                <View style={ globalStyles.containerComponentInput }>
-                    <Text style={ globalStyles.textInput }>
-                        Valor de conversión:
-                    </Text>
-                    <AmountResult 
-                    label={filtroModo === 'venta' ? "USD$" : "ARG$"}
-                    value={oficialData !== undefined && blueData !== undefined ? calcularConversion(valueInput, filtroMoneda, filtroModo, oficialData, blueData) : "Error"}
+                    {/* Selector de Modo (Venta/Compra) */}
+                    <SelectOptionsButton
+                        options={opcionesFiltroModo}
+                        selected={filtroModo}
+                        onSelect={(nuevoValor) => setFiltroModo(nuevoValor)}
                     />
-                </View>
 
-                {/* // Text que muestra los valores de cada dolar en su compra y venta */}
-                <View style={ globalStyles.containerData }>
-                    <Text style={ globalStyles.textInput }>
-                        Compra: $ { filtroMoneda === "oficial" ? oficialData?.compra : blueData?.compra }
-                    </Text>
-                    <Text> </Text>
-                    <Text style={ globalStyles.textInput }>
-                        Venta: $ { filtroMoneda === "oficial" ? oficialData?.venta : blueData?.venta }
-                    </Text>
-                </View>
+                    {/* // Output que muestra la conversion calculada */}
+                    <View style={ globalStyles.containerComponentInput }>
+                        <Text style={ globalStyles.textInput }>
+                            Valor de conversión:
+                        </Text>
+                        <AmountResult 
+                        label={filtroModo === 'venta' ? "USD$" : "ARG$"}
+                        value={oficialData !== undefined && blueData !== undefined ? calcularConversion(valueInput, filtroMoneda, filtroModo, oficialData, blueData) : "Error"}
+                        />
+                    </View>
 
-                {/* // Text que muestra la ultima actualizacion de la moneda */}
-                <View style={ globalStyles.containerData }>
-                    <Text style={globalStyles.textInformation}>
-                        Cotización del { filtroMoneda === "oficial" ? oficialData?.fechaActualizacion : blueData?.fechaActualizacion}
-                    </Text>
-                </View>
+                    {/* // Text que muestra los valores de cada dolar en su compra y venta */}
+                    <View style={ globalStyles.containerData }>
+                        <Text style={[globalStyles.textInput, { flexShrink: 1 }]}>
+                            Compra: $ { filtroMoneda === "oficial" ? oficialData?.compra : blueData?.compra }
+                        </Text>
+                        <Text> </Text>
+                        <Text style={[globalStyles.textInput, { flexShrink: 1 }]}>
+                            Venta: $ { filtroMoneda === "oficial" ? oficialData?.venta : blueData?.venta }
+                        </Text>
+                    </View>
 
+                    {/* // Text que muestra la ultima actualizacion de la moneda */}
+                    <View style={ globalStyles.containerData }>
+                        <Text style={globalStyles.textInformation}>
+                            Cotización del { filtroMoneda === "oficial" ? oficialData?.fechaActualizacion : blueData?.fechaActualizacion}
+                        </Text>
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         </ScreenContainer>
 

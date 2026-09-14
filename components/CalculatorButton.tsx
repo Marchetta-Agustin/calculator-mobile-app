@@ -28,7 +28,8 @@ const CalculatorButton = ({
                     ? (color === Colors.orange 
                     ? Colors.orangePressed : Colors.lightGrayPressed)
                     : color, */
-                width: doubleSize ? 160 : 70,
+                //width: doubleSize ? 160 : 70,
+                flex: doubleSize ? 2 : 1,
             })}
             onPress={() => {
                 /* Cada vez q tocamos algun boton, el celular vibra */

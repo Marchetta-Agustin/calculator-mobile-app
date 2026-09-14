@@ -5,6 +5,7 @@ import { Colors } from "@/constants/Colors";
 import { useCaculator } from "@/hooks/useCalculator";
 import { globalStyles } from "@/styles/global-styles";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CalculatorApp = () => {
 
@@ -25,161 +26,165 @@ const CalculatorApp = () => {
 
   return (
     <ScreenContainer style={ [globalStyles.background, globalStyles.calculatorContainer] }>
+        <SafeAreaView style={{ flex: 1, justifyContent: "flex-end" }} edges={['top']}>
 
-        {/* Resultados */}
-        <View
-            style={{ paddingHorizontal: 30, 
-                paddingBottom: 20}}
-        >
-            <ThemeText variant="h1" >{formula}</ThemeText>
-            
-            <ThemeText variant="h2" >
-                {
-                    formula === prevNumber ? (
-                        <ThemeText variant="h2"> </ThemeText>
-                    ) : (
-                        <ThemeText variant="h2">{prevNumber}</ThemeText>
-                    )
-                }
-                </ThemeText>
+            {/* Resultados */}
+            <View
+                style={{ paddingHorizontal: 30, 
+                    paddingBottom: 20}}
+            >
+                <ThemeText variant="h1" >{formula}</ThemeText>
+                
+                <ThemeText variant="h2" >
+                    {
+                        formula === prevNumber ? (
+                            <ThemeText variant="h2"> </ThemeText>
+                        ) : (
+                            <ThemeText variant="h2">{prevNumber}</ThemeText>
+                        )
+                    }
+                    </ThemeText>
 
-        </View>
+            </View>
 
-        {/* Primera Filas de Botones */}
-        <View style={ globalStyles.row }>
+            <View style={{ flex: 1, justifyContent: "space-between", paddingBottom: 15 }}>
 
-            <CalculatorButton 
-                label="C" 
-                blackText
-                color={Colors.lightGray}
-                onPress={clean}
-            />
+                {/* Primera Filas de Botones */}
+                <View style={ globalStyles.row }>
 
-            <CalculatorButton 
-                label="+/-" 
-                blackText 
-                color={Colors.lightGray}
-                onPress={toggleSign}
-            />
+                    <CalculatorButton 
+                        label="C" 
+                        blackText
+                        color={Colors.lightGray}
+                        onPress={clean}
+                    />
 
-            <CalculatorButton 
-                label="del" 
-                blackText
-                color={Colors.lightGray}
-                onPress={deleteLast}
-            />
+                    <CalculatorButton 
+                        label="+/-" 
+                        blackText 
+                        color={Colors.lightGray}
+                        onPress={toggleSign}
+                    />
 
-            <CalculatorButton 
-                label="÷"
-                color={Colors.orange}
-                onPress={divideOperation}
-            />
+                    <CalculatorButton 
+                        label="del" 
+                        blackText
+                        color={Colors.lightGray}
+                        onPress={deleteLast}
+                    />
 
-        </View>
+                    <CalculatorButton 
+                        label="÷"
+                        color={Colors.orange}
+                        onPress={divideOperation}
+                    />
 
-        {/* Segunda Filas de Botones */}
-        <View style={ globalStyles.row }>
+                </View>
 
-            <CalculatorButton 
-                label="7"
-                onPress={()=> buildNumber("7")}
-            />
+                {/* Segunda Filas de Botones */}
+                <View style={ globalStyles.row }>
 
-            <CalculatorButton 
-                label="8" 
-                onPress={()=> buildNumber("8")}
-            />
+                    <CalculatorButton 
+                        label="7"
+                        onPress={()=> buildNumber("7")}
+                    />
 
-            <CalculatorButton 
-                label="9" 
-                onPress={()=> buildNumber("9")}
-            />
+                    <CalculatorButton 
+                        label="8" 
+                        onPress={()=> buildNumber("8")}
+                    />
 
-            <CalculatorButton 
-                label="x"
-                color={Colors.orange}
-                onPress={multiplyOperation}
-            />
+                    <CalculatorButton 
+                        label="9" 
+                        onPress={()=> buildNumber("9")}
+                    />
 
-        </View>
+                    <CalculatorButton 
+                        label="x"
+                        color={Colors.orange}
+                        onPress={multiplyOperation}
+                    />
 
-
-        {/* Tercera Filas de Botones */}
-        <View style={ globalStyles.row }>
-
-            <CalculatorButton 
-                label="4"
-                onPress={()=> buildNumber("4")}
-            />
-
-            <CalculatorButton 
-                label="5"
-                onPress={()=> buildNumber("5")}
-            />
-
-            <CalculatorButton 
-                label="6"
-                onPress={()=> buildNumber("6")}
-            />
-
-            <CalculatorButton 
-                label="-"
-                color={Colors.orange}
-                onPress={subtractOperation}
-            />
-
-        </View>
+                </View>
 
 
-        {/* Cuarta Filas de Botones */}
-        <View style={ globalStyles.row }>
+                {/* Tercera Filas de Botones */}
+                <View style={ globalStyles.row }>
 
-            <CalculatorButton 
-                label="1"
-                onPress={()=> buildNumber("1")}
-            />
+                    <CalculatorButton 
+                        label="4"
+                        onPress={()=> buildNumber("4")}
+                    />
 
-            <CalculatorButton 
-                label="2"
-                onPress={()=> buildNumber("2")}
-            />
+                    <CalculatorButton 
+                        label="5"
+                        onPress={()=> buildNumber("5")}
+                    />
 
-            <CalculatorButton 
-                label="3"
-                onPress={()=> buildNumber("3")}
-            />
+                    <CalculatorButton 
+                        label="6"
+                        onPress={()=> buildNumber("6")}
+                    />
 
-            <CalculatorButton 
-                label="+"
-                color={Colors.orange}
-                onPress={addOperation}
-            />
+                    <CalculatorButton 
+                        label="-"
+                        color={Colors.orange}
+                        onPress={subtractOperation}
+                    />
 
-        </View>
+                </View>
 
 
-        {/* Quinta Filas de Botones */}
-        <View style={ globalStyles.row }>
+                {/* Cuarta Filas de Botones */}
+                <View style={ globalStyles.row }>
 
-            <CalculatorButton 
-                label="0"
-                doubleSize
-                onPress={()=> buildNumber("0")}
-            />
+                    <CalculatorButton 
+                        label="1"
+                        onPress={()=> buildNumber("1")}
+                    />
 
-            <CalculatorButton 
-                label="."
-                onPress={()=> buildNumber(".")}
-            />
+                    <CalculatorButton 
+                        label="2"
+                        onPress={()=> buildNumber("2")}
+                    />
 
-            <CalculatorButton 
-                label="="
-                color={Colors.orange}
-                onPress={calculateResult}
-            />
+                    <CalculatorButton 
+                        label="3"
+                        onPress={()=> buildNumber("3")}
+                    />
 
-        </View>
+                    <CalculatorButton 
+                        label="+"
+                        color={Colors.orange}
+                        onPress={addOperation}
+                    />
 
+                </View>
+
+
+                {/* Quinta Filas de Botones */}
+                <View style={ globalStyles.row }>
+
+                    <CalculatorButton 
+                        label="0"
+                        doubleSize
+                        onPress={()=> buildNumber("0")}
+                    />
+
+                    <CalculatorButton 
+                        label="."
+                        onPress={()=> buildNumber(".")}
+                    />
+
+                    <CalculatorButton 
+                        label="="
+                        color={Colors.orange}
+                        onPress={calculateResult}
+                    />
+
+                </View>
+            </View>
+        </SafeAreaView>
     </ScreenContainer>
   )
 }

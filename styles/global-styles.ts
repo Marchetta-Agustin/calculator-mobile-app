@@ -10,6 +10,7 @@ export const globalStyles = StyleSheet.create({
 
     tabBar: {
         backgroundColor: Colors.background,
+        marginTop: 0,
         marginBottom: 15,
     },
 
@@ -43,8 +44,10 @@ export const globalStyles = StyleSheet.create({
     row: {
         flexDirection: "row",
         justifyContent: "center",
-        marginBottom: 18,
+        //marginBottom: 16,
         paddingHorizontal: 10,
+        flex:1,
+        alignItems: "center",
     },
 
     button: {
@@ -67,7 +70,7 @@ export const globalStyles = StyleSheet.create({
 
     screen: {
         flex: 1,
-        justifyContent: "center",
+        //justifyContent: "center",
         paddingHorizontal: 16,
     },
 
@@ -100,7 +103,8 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: Colors.darkGray,
         borderRadius: 8,
         padding: 10,
-        marginBlock: 40,
+        //marginBlock: 40,
+        marginBlock: 16,
         gap: 10,
     },
 
@@ -143,10 +147,12 @@ export const globalStyles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 10,
         backgroundColor: Colors.background,
-        marginBottom: 20
+        //marginBottom: 20
     },
 
     modalContent: {
+        //marginBottom: 16
+        flex:1,
         marginBottom: 16
     },
 
@@ -217,6 +223,7 @@ export const globalStyles = StyleSheet.create({
     },
 
     currencyRowText: {
+        flex:1,
         fontSize: 18,
         fontWeight: '600',
         textAlign: "left",

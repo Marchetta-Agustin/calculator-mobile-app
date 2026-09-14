@@ -1,14 +1,13 @@
 import { Modal, FlatList, Pressable, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { ListCountries } from "@/data/currencies";
+import { ListCountries, Moneda } from "@/data/currencies";
 import { globalStyles } from "@/styles/global-styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MonedaCodigo } from "@/app/(tabs)/global";
 
 interface Props {
     visible: boolean;
     onClose: () => void;
-    onSelect: (moneda: MonedaCodigo) => void;
+    onSelect: (moneda: Moneda) => void;
 }
 
 const CurrencyPickerModal = ({ visible, onClose, onSelect }: Props) => {
@@ -32,7 +31,10 @@ const CurrencyPickerModal = ({ visible, onClose, onSelect }: Props) => {
                                 style={globalStyles.currencyRow}
                                 onPress={() => onSelect(item)}
                             >
-                                <Text style={globalStyles.currencyRowText}>
+                                <Text 
+                                style={globalStyles.currencyRowText}
+                                numberOfLines={1}
+                                >
                                     {item.code} - {item.name}
                                 </Text>
                                 <Image
